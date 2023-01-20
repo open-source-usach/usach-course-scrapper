@@ -31,6 +31,7 @@ for faculty in range(2, len(faculties) + 1):
     for career in range(2, len(careers) + 1):
         driver.find_element(By.XPATH, f'/html/body/div/div[2]/div/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/form/div/select/option[{career}]').click()
         careerCode = driver.find_element(By.XPATH, f'/html/body/div/div[2]/div/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/form/div/select/option[{career}]').text.split(' ', 2)
+        allCoursesCareer[facultyCode[0]]['careers'][careerCode[0]] = {'name': careerCode[2], 'courses': {}}
         # Goes through the first x periods
         for period in range(2, 4):
             driver.find_element(By.XPATH, f'/html/body/div/div[2]/div/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/form/center/h6/select/option[{period}]').click()
@@ -64,7 +65,7 @@ for faculty in range(2, len(faculties) + 1):
                                 className = driver.find_element(By.XPATH, f'/html/body/center/table[{table}]/tbody/tr[3]/td/table/tbody/tr[2]/td/font/table/tbody/tr[{course}]/td[5]/strong/font').text
                                 foundCourses.append(f"{code}: {className}")
                                 allCourses[facultyCode[0]]['courses'][code] = className
-                                allCoursesCareer[facultyCode[0]]['careers'][careerCode[0]] = {'name': careerCode[2]}
+                                
                                 allCoursesCareer[facultyCode[0]]['careers'][careerCode[0]]['courses'][code] = className
                                 log(2, foundCourses)
                 else:
