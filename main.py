@@ -2,10 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from functions import log
 import time
+import json
 
 
-coursesByFaculty = open('coursesByFaculty.txt', 'w')
-coursesByCareer = open('coursesByCareer.txt', 'w')
+coursesByFaculty = open('coursesByFaculty.json', 'w')
+coursesByCareer = open('coursesByCareer.json', 'w')
 allCourses = {}
 allCoursesCareer = {}
 
@@ -84,8 +85,8 @@ for faculty in range(2, len(faculties) + 1):
     driver.find_element(By.XPATH, f'//*[@id="id_facultad"]/option[{faculty}]').click()
 
 
-coursesByFaculty.write(str(allCourses))
-coursesByCareer.write(str(allCoursesCareer))
+json.dump(coursesByFaculty, allCourses, ensure_ascii=False)
+json.dump(coursesByCareer, allCoursesCareer, ensure_ascii=False)
 
 coursesByFaculty.close()
 coursesByCareer.close()
